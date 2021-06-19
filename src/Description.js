@@ -7,7 +7,17 @@ import ReactStars from "react-rating-stars-component";
 
 
  const Description = ({match,movie,history,changerating}) => {
-   
+    function extracting(str){
+        str=str.split("")
+        let a=[]
+  for(let i=0;i<str.length;i++)
+ {if(str[i]=="&")
+   return a.join("")
+   else 
+  a[i] =str[i]
+   }
+ return a.join("")
+   }
 
 
 
@@ -15,10 +25,9 @@ var show
      if(movie.find(elm=>elm.id===match.params.id)){
         show=true
     var {name,id,trailer,description,rating}=movie.find(elm=>elm.id===match.params.id)
-     console.log(typeof(match.params.id))
-     console.log(movie)
-     console.log(typeof(name))
+    
      trailer=trailer.replace("watch?v=","embed/")
+     trailer=extracting(trailer)
     
    } else show=false
 
@@ -57,11 +66,11 @@ var show
            <p style={{width:"70%",fontWeight:"bold",fontFamily:'Roboto'}}>{description}</p>
            <h2>Rate the movie</h2>
            <ReactStars
-    count={5}
-    size={24}
-    activeColor="#ffd700"
-    value={rate}
-    onChange={ratingChanged}
+           count={5}
+          size={24}
+          activeColor="#ffd700"
+           value={rate}
+           onChange={ratingChanged}
   />
            <Button onClick={()=>history.goBack()} variant ="dark">Go to home page</Button></div>}
             
