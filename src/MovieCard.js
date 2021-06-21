@@ -1,4 +1,6 @@
 
+import StarRatingComponent from 'react-star-rating-component';
+
 import ReactStars from "react-rating-stars-component";
 import {Card,Button} from 'react-bootstrap'
 import {useState,useEffect} from "react"
@@ -13,14 +15,17 @@ function fndelet()
     deletefromfiltermovie(id)
   }
    
-  const ratingChanged=(newRating)=>{
+/*   const ratingChanged=(newRating)=>{
 
     changerating(id,newRating)
     filterchangerating(id,newRating)
      
      setRate(newRating) 
-    
-    
+    } */
+  const onStarClick=(nextValue, prevValue, name)=>{
+    changerating(id,nextValue);
+    setRate(nextValue) 
+
   }
   useEffect(()=>{
     
@@ -40,13 +45,7 @@ function fndelet()
     </Card.Text>
   </Card.Body>
   <div className="flexing">
-  <ReactStars
-    count={5}
-    size={24}
-    activeColor="#ffd700"
-    value={rate}
-    onChange={ratingChanged}
-  />
+  <StarRatingComponent value={rate} starCount={5} onStarClick={onStarClick} size={24} />
   </div>
   <Button  className="deletebutton" variant="danger" onClick={fndelet}  >Delte</Button>
   
